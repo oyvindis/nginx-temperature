@@ -1,0 +1,18 @@
+version: '3.1'
+services:
+  nginx-temperature:
+    image: ois/nginx-temperature:latest
+    depends_on:
+      - temperature-server
+    networks:
+      - my-network
+    ports:
+      - 3380:80
+  temperature-server:
+    image: ois/temperature-server:latest
+    networks:
+      my-network:
+        aliases:
+          - temperature-server
+networks:
+  my-network:
