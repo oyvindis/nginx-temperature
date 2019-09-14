@@ -4,6 +4,7 @@ services:
     image: ois/nginx-temperature:latest
     depends_on:
       - temperature-server
+      - temperature-client
     networks:
       - my-network
     ports:
@@ -14,5 +15,11 @@ services:
       my-network:
         aliases:
           - temperature-server
+  temperature-client:
+    image: ois/temperature-client:latest
+    networks:
+      my-network:
+        aliases:
+          - temperature-client
 networks:
   my-network:
